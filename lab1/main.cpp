@@ -9,7 +9,7 @@ int main() {
     std::string binaryFileName;
     std::string outputFileName;
     int employeeAmount;
-    int wage;
+    int salary;
 
     std::cout << "Enter the name of a binary file:\n";
     std::cin >> binaryFileName;
@@ -19,6 +19,7 @@ int main() {
 
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
+
     ZeroMemory(&si, sizeof(si));
     ZeroMemory(&pi, sizeof(pi));
     si.cb = sizeof(STARTUPINFO);
@@ -29,7 +30,6 @@ int main() {
     }
     WaitForSingleObject(pi.hProcess, INFINITE);
 
-    std::cout << "Binary file:\n";
     binaryFileName += ".bin";
 
     std::ifstream fin(binaryFileName, std::ios::binary);
@@ -43,7 +43,7 @@ int main() {
 
     std::cout << "The contents of a binary file: \n";
 
-    for (int i = 0; i < employeeAmount; i++) {
+    for (int i = 0; i < employeeAmount; ++i) {
         fin.read(reinterpret_cast<char*>(&entry), sizeof(employee));
         std::cout << entry.num << ' ' << entry.name << ' ' << entry.hours << '\n';
     }
@@ -52,12 +52,12 @@ int main() {
     std::cin >> outputFileName;
 
     std::cout << "Enter the salary per hour:\n";
-    std::cin >> wage;
+    std::cin >> salary;
 
     ZeroMemory(&si, sizeof(si));
     ZeroMemory(&pi, sizeof(pi));
 
-    sprintf(arg, "%s %s %s %d", "Reporter.exe", binaryFileName.c_str(), outputFileName.c_str(), wage);
+    sprintf(arg, "%s %s %s %d", "Reporter.exe", binaryFileName.c_str(), outputFileName.c_str(), salary);
     if (!CreateProcess(nullptr, arg, nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi)) {
         std::cerr << "Failed to execute Reporter.exe\n";
         return -1;
@@ -65,6 +65,7 @@ int main() {
     WaitForSingleObject(pi.hProcess, INFINITE);
 
     outputFileName += ".txt";
+
     std::ifstream finReport(outputFileName);
     if (!finReport) {
         std::cerr << "Unable to open the input file \"" << outputFileName << "\"\n";
@@ -72,7 +73,7 @@ int main() {
     }
 
     std::string line;
-    for (int i = 0; i <= employeeAmount; i++) {
+    for (int i = 0; i <= employeeAmount; ++i) {
         std::getline(finReport, line);
         std::cout << line << "\n";
     }

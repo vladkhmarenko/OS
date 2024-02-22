@@ -25,11 +25,11 @@ int main(int argc, char* argv[]) {
     std::vector <employee> records(employeeAmount);
 
     for (int i = 0; i < employeeAmount; i++) {
-        std::cout << "Enter the ID of an employee number " << i + 1 << ":";
+        std::cout << "Enter the ID of an employee number " << i + 1 << ": ";
         std::cin >> records[i].num;
-        std::cout << "Enter the name of an employee number " << i + 1 << ":";
+        std::cout << "Enter the name of an employee number " << i + 1 << ": ";
         std::cin >> records[i].name;
-        std::cout << "Enter the hours of an employee number " << i + 1 << ":";
+        std::cout << "Enter the number of hours worked for an employee number " << i + 1 << ": ";
         std::cin >> records[i].hours;
     }
 
