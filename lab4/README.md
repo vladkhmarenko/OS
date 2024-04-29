@@ -7,7 +7,7 @@ g++ -o Sender.exe sender.cpp
 g++ -o Receiver.exe receiver.cpp
 ~~~
 ~~~
-./Receiver.cpp
+./Receiver.exe
 ~~~
 ## Functionality
 A program for message passing between processes via a shared file. The program should consist of one Receiver process and one Sender process. The Sender process sends messages to the Receiver process.
